@@ -1,100 +1,57 @@
-package com.springboot.springboot.domain;
+package com.springboot.springboot.model;
 
-import java.util.UUID;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class UpdateHouseRequest {
 
-
-@Entity
-@Table(name = "House")
-public class House {
-
-    @Id
-    private String Id;
-
-    @Column
     private double HousePrice;
-
-    @Column
     private double LotArea;
-
-    @Column
     private String Street;
-
-    @Column
     private String SaleCondtion;
-
-    @Column
     private int YearBuilt;
 
-    public House(){
-        
+
+    
+    public UpdateHouseRequest() {
     }
 
-    public House(double housePrice, double lotArea, String street, String saleCondtion, int yearBuilt) {
-        Id = UUID.randomUUID().toString();
+    public UpdateHouseRequest(double housePrice, double lotArea, String street, String saleCondtion,
+            int yearBuilt) {
         HousePrice = housePrice;
         LotArea = lotArea;
         Street = street;
         SaleCondtion = saleCondtion;
         YearBuilt = yearBuilt;
     }
-
-    public void Update(double housePrice, double lotArea, String street, String saleCondtion, int yearBuilt){
-        HousePrice = housePrice;
-        LotArea = lotArea;
-        Street = street;
-        SaleCondtion = saleCondtion;
-        YearBuilt = yearBuilt;
-    }
-
+    
     public double getHousePrice() {
         return HousePrice;
     }
-
     public void setHousePrice(double housePrice) {
         HousePrice = housePrice;
     }
-
     public double getLotArea() {
         return LotArea;
     }
-
     public void setLotArea(double lotArea) {
         LotArea = lotArea;
     }
-
     public String getStreet() {
         return Street;
     }
-
     public void setStreet(String street) {
         Street = street;
     }
-
     public String getSaleCondtion() {
         return SaleCondtion;
     }
-
     public void setSaleCondtion(String saleCondtion) {
         SaleCondtion = saleCondtion;
     }
-
     public int getYearBuilt() {
         return YearBuilt;
     }
-
     public void setYearBuilt(int yearBuilt) {
         YearBuilt = yearBuilt;
     }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String id) {
-        Id = id;
-    }
+   
+    
 }

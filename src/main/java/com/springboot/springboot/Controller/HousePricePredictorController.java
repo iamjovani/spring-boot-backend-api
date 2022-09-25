@@ -1,7 +1,5 @@
 package com.springboot.springboot.controller;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springboot.springboot.domain.House;
 import com.springboot.springboot.model.CreateHouseRequest;
 import com.springboot.springboot.model.CreateHouseResponse;
+import com.springboot.springboot.model.UpdateHouseRequest;
 import com.springboot.springboot.repository.IHouseRepository;
 
 
@@ -24,7 +23,7 @@ public class HousePricePredictorController {
     IHouseRepository _HouseRepository;
 
     @RequestMapping(value = "/HousePricePredictor/House", method = RequestMethod.POST)
-    public ResponseEntity test(@RequestBody CreateHouseRequest request)
+    public ResponseEntity<?> post(@RequestBody CreateHouseRequest request)
     {
         House houseRequest = new House(request.getHousePrice(), request.getLotArea(), request.getStreet(), request.getSaleCondtion(), request.getYearBuilt());
         _HouseRepository.save(houseRequest);
@@ -40,5 +39,13 @@ public class HousePricePredictorController {
         return houseResponseObj.getResponse();
     }
     
+    @RequestMapping(value="HousePricePredictor/House/{id}", method=RequestMethod.PUT)
+    public ResponseEntity<?> update(@PathVariable String id, @RequestBody UpdateHouseRequest request)
+    {
+        House houseObj= _HouseRepository.getReferenceById(id);
+        houseObj.Update(request.getHousePrice(), request.getLotArea(), request.getStreet(), request.getSaleCondtion(), request.getYearBuilt());
+        _HouseRepository.save(houseObj);
+        return ResponseEntity.ok().build();
+    }
     
 }
