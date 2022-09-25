@@ -2,7 +2,7 @@ package com.springboot.springboot.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.springboot.springboot.Entity.*;
+import com.springboot.springboot.domain.*;
 
 public class CreateHouseResponse {
 

@@ -3,7 +3,7 @@ package com.springboot.springboot.model;
 public class CreateHouseRequest {
     private double HousePrice;
     private double LotArea;
-    private double SquareFeet;
+    private String Street;
     private String SaleCondtion;
     private int YearBuilt;
 
@@ -12,11 +12,11 @@ public class CreateHouseRequest {
     public CreateHouseRequest() {
     }
 
-    public CreateHouseRequest(double housePrice, double lotArea, double squareFeet, String saleCondtion,
+    public CreateHouseRequest(double housePrice, double lotArea, String street, String saleCondtion,
             int yearBuilt) {
         HousePrice = housePrice;
         LotArea = lotArea;
-        SquareFeet = squareFeet;
+        Street = street;
         SaleCondtion = saleCondtion;
         YearBuilt = yearBuilt;
     }
@@ -33,11 +33,11 @@ public class CreateHouseRequest {
     public void setLotArea(double lotArea) {
         LotArea = lotArea;
     }
-    public double getSquareFeet() {
-        return SquareFeet;
+    public String getStreet() {
+        return Street;
     }
-    public void setSquareFeet(double squareFeet) {
-        SquareFeet = squareFeet;
+    public void setStreet(String street) {
+        Street = street;
     }
     public String getSaleCondtion() {
         return SaleCondtion;
