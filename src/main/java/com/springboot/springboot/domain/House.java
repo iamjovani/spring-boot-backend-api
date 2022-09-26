@@ -1,5 +1,7 @@
 package com.springboot.springboot.domain;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,24 +11,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "House")
-public class House {
+public class House extends Auditable{
 
     @Id
     private String Id;
-
-    @Column
     private double HousePrice;
-
-    @Column
     private double LotArea;
-
-    @Column
     private String Street;
-
-    @Column
     private String SaleCondtion;
-
-    @Column
     private int YearBuilt;
 
     public House(){
@@ -34,6 +26,7 @@ public class House {
     }
 
     public House(double housePrice, double lotArea, String street, String saleCondtion, int yearBuilt) {
+        super("admin", LocalDateTime.now());
         Id = UUID.randomUUID().toString();
         HousePrice = housePrice;
         LotArea = lotArea;
