@@ -1,4 +1,5 @@
 package com.springboot.springboot.controller;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.springboot.domain.House;
+import com.springboot.springboot.model.CreateHouseCollectionResponse;
 import com.springboot.springboot.model.CreateHouseRequest;
 import com.springboot.springboot.model.CreateHouseResponse;
 import com.springboot.springboot.model.UpdateHouseRequest;
@@ -28,6 +31,13 @@ public class HousePricePredictorController {
         House houseRequest = new House(request.HousePrice, request.LotArea, request.Street, request.SaleCondtion, request.YearBuilt);
         _HouseRepository.save(houseRequest);
         return ResponseEntity.ok().build();
+    }
+
+    @RequestMapping(value = "/HousePricePredictor/House", method = RequestMethod.GET)
+    public @ResponseBody List<House> findAll()
+    {
+        List<House> houseRequest = _HouseRepository.findAll();
+        return houseRequest;
     }
 
     @RequestMapping(value="/HousePricePredictor/House/{id}", method=RequestMethod.GET)

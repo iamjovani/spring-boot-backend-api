@@ -41,11 +41,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-		</dependency>
-
-		<dependency>
         	<groupId>junit</groupId>
         	<artifactId>junit-dep</artifactId>
         	<version>4.8.2</version>
