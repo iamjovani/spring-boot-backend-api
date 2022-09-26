@@ -25,7 +25,7 @@ public class HousePricePredictorController {
     @RequestMapping(value = "/HousePricePredictor/House", method = RequestMethod.POST)
     public ResponseEntity<?> post(@RequestBody CreateHouseRequest request)
     {
-        House houseRequest = new House(request.getHousePrice(), request.getLotArea(), request.getStreet(), request.getSaleCondtion(), request.getYearBuilt());
+        House houseRequest = new House(request.HousePrice, request.LotArea, request.Street, request.SaleCondtion, request.YearBuilt);
         _HouseRepository.save(houseRequest);
         return ResponseEntity.ok().build();
     }
@@ -43,7 +43,7 @@ public class HousePricePredictorController {
     public ResponseEntity<?> update(@PathVariable String id, @RequestBody UpdateHouseRequest request)
     {
         House houseObj= _HouseRepository.getReferenceById(id);
-        houseObj.Update(request.getHousePrice(), request.getLotArea(), request.getStreet(), request.getSaleCondtion(), request.getYearBuilt());
+        houseObj.Update(request.HousePrice, request.LotArea, request.Street, request.SaleCondtion, request.YearBuilt);
         _HouseRepository.save(houseObj);
         return ResponseEntity.ok().build();
     }
