@@ -1,9 +1,5 @@
 package com.springboot.springboot.domain;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -25,8 +21,8 @@ public class House extends Auditable{
         
     }
 
-    public House(double housePrice, double lotArea, String street, String saleCondtion, int yearBuilt) {
-        super("admin", LocalDateTime.now());
+    public House(double housePrice, double lotArea, String street, String saleCondtion, int yearBuilt, String createdBy) {
+        super(createdBy);
         Id = UUID.randomUUID().toString();
         HousePrice = housePrice;
         LotArea = lotArea;
@@ -35,7 +31,8 @@ public class House extends Auditable{
         YearBuilt = yearBuilt;
     }
 
-    public void Update(double housePrice, double lotArea, String street, String saleCondtion, int yearBuilt){
+    public void Update(double housePrice, double lotArea, String street, String saleCondtion, int yearBuilt, String modifiedBy){
+        super.setModifiedBy(modifiedBy);
         HousePrice = housePrice;
         LotArea = lotArea;
         Street = street;

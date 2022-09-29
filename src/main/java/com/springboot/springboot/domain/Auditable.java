@@ -7,10 +7,10 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class Auditable {
 
-    private String Created;
-    private String Modified;
-    private LocalDateTime CreatedBy;
-    private LocalDateTime ModifiedBy;
+    private String CreatedBy;
+    private String ModifiedBy;
+    private LocalDateTime Created;
+    private LocalDateTime Modified;
     
     public Auditable() {
         Created = null;
@@ -19,41 +19,30 @@ public class Auditable {
         ModifiedBy = null;
     }
 
-    public Auditable(String created, LocalDateTime createdBy) {
-        Created = created;
+    public Auditable(String createdBy) {
+        Created = LocalDateTime.now();
         CreatedBy = createdBy;
     }
 
-    public String getCreated() {
-        return Created;
+    public void setModifiedBy(String modifiedBy) {
+        ModifiedBy = modifiedBy;
+        Modified   = LocalDateTime.now();
     }
 
-    public void setCreated(String created) {
-        Created = created;
-    }
-
-    public LocalDateTime getCreatedBy() {
+    public String getCreatedBy() {
         return CreatedBy;
     }
 
-    public void setCreatedBy(LocalDateTime createdBy) {
-        CreatedBy = createdBy;
-    }
-
-    public String getModified() {
-        return Modified;
-    }
-
-    public void setModified(String modified) {
-        Modified = modified;
-    }
-
-    public LocalDateTime getModifiedBy() {
+    public String getModifiedBy() {
         return ModifiedBy;
     }
 
-    public void setModifiedBy(LocalDateTime modifiedBy) {
-        ModifiedBy = modifiedBy;
+    public LocalDateTime getModified(){
+        return Modified;
+    }
+
+    public LocalDateTime getCreated() {
+        return Created;
     }
 }
 
