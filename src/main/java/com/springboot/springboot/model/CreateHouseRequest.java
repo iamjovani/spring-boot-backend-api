@@ -1,15 +1,26 @@
 package com.springboot.springboot.model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 public class CreateHouseRequest {
-    public double HousePrice;
-    public double LotArea;
+
+    @Min(value = 1, message = "House price required")
+    public float HousePrice;
+
+    @Min(value = 1, message = "Lot Area required required")
+    public float LotArea;
+
+    @NotBlank(message = "Street Address required")
     public String Street;
+
+    @NotBlank(message = "Sale Condition required")
     public String SaleCondtion;
     public int YearBuilt;
 
 
 
-    public CreateHouseRequest(double housePrice, double lotArea, String street, String saleCondtion,
+    public CreateHouseRequest(float housePrice, float lotArea, String street, String saleCondtion,
             int yearBuilt) {
         HousePrice = housePrice;
         LotArea = lotArea;

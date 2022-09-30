@@ -1,5 +1,6 @@
 package com.springboot.springboot.domain;
 import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,8 +12,8 @@ public class House extends Auditable{
 
     @Id
     private String Id;
-    private double HousePrice;
-    private double LotArea;
+    private float HousePrice;
+    private float LotArea;
     private String Street;
     private String SaleCondtion;
     private int YearBuilt;
@@ -21,7 +22,7 @@ public class House extends Auditable{
         
     }
 
-    public House(double housePrice, double lotArea, String street, String saleCondtion, int yearBuilt, String createdBy) {
+    public House(float housePrice, float lotArea, String street, String saleCondtion, int yearBuilt, String createdBy) {
         super(createdBy);
         Id = UUID.randomUUID().toString();
         HousePrice = housePrice;
@@ -31,7 +32,7 @@ public class House extends Auditable{
         YearBuilt = yearBuilt;
     }
 
-    public void Update(double housePrice, double lotArea, String street, String saleCondtion, int yearBuilt, String modifiedBy){
+    public void Update(float housePrice, float lotArea, String street, String saleCondtion, int yearBuilt, String modifiedBy){
         super.setModifiedBy(modifiedBy);
         HousePrice = housePrice;
         LotArea = lotArea;
@@ -44,7 +45,7 @@ public class House extends Auditable{
         return HousePrice;
     }
 
-    public void setHousePrice(double housePrice) {
+    public void setHousePrice(float housePrice) {
         HousePrice = housePrice;
     }
 
@@ -52,7 +53,7 @@ public class House extends Auditable{
         return LotArea;
     }
 
-    public void setLotArea(double lotArea) {
+    public void setLotArea(float lotArea) {
         LotArea = lotArea;
     }
 

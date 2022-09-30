@@ -2,6 +2,8 @@ package com.springboot.springboot.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,27 +21,28 @@ import com.springboot.springboot.repository.IHouseRepository;
 
 
 @RestController
+@RequestMapping("${url.base.path}/HousePricePredictor")
 public class HousePricePredictorController {
 
     @Autowired
     IHouseRepository _HouseRepository;
 
-    @RequestMapping(value = "/HousePricePredictor/House", method = RequestMethod.POST)
-    public ResponseEntity<?> post(@RequestBody CreateHouseRequest request)
+    @RequestMapping(value = "/House", method = RequestMethod.POST)
+    public ResponseEntity<?> post(@RequestBody @Valid CreateHouseRequest request)
     {
         House houseRequest = new House(request.HousePrice, request.LotArea, request.Street, request.SaleCondtion, request.YearBuilt, "Admin");
         _HouseRepository.save(houseRequest);
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping(value = "/HousePricePredictor/House", method = RequestMethod.GET)
+    @RequestMapping(value = "/House", method = RequestMethod.GET)
     public @ResponseBody List<House> findAll()
     {
         List<House> houseRequest = _HouseRepository.findAll();
         return houseRequest;
     }
 
-    @RequestMapping(value="/HousePricePredictor/House/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/House/{id}", method=RequestMethod.GET)
     public Map<String, String> requestMethodName(@PathVariable String id) 
     {
         
@@ -48,7 +51,7 @@ public class HousePricePredictorController {
         return houseResponseObj.getResponse();
     }
     
-    @RequestMapping(value="HousePricePredictor/House/{id}", method=RequestMethod.PUT)
+    @RequestMapping(value="House/{id}", method=RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable String id, @RequestBody UpdateHouseRequest request)
     {
         House houseObj= _HouseRepository.getReferenceById(id);
