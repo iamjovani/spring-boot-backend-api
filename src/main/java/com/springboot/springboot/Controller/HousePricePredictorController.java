@@ -52,7 +52,7 @@ public class HousePricePredictorController {
     }
     
     @RequestMapping(value="House/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<?> update(@PathVariable String id, @RequestBody UpdateHouseRequest request)
+    public ResponseEntity<?> update(@PathVariable String id, @RequestBody @Valid UpdateHouseRequest request)
     {
         House houseObj= _HouseRepository.getReferenceById(id);
         houseObj.Update(request.HousePrice, request.LotArea, request.Street, request.SaleCondtion, request.YearBuilt, "Admin");

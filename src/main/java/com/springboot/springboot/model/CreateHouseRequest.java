@@ -16,6 +16,8 @@ public class CreateHouseRequest {
 
     @NotBlank(message = "Sale Condition required")
     public String SaleCondtion;
+
+    @Min(value = 1700, message = "Year built required")
     public int YearBuilt;
 
 

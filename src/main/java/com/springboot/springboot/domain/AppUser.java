@@ -1,6 +1,5 @@
 package com.springboot.springboot.domain;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
