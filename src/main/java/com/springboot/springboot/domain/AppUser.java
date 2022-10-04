@@ -1,5 +1,6 @@
 package com.springboot.springboot.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -17,10 +18,9 @@ public class AppUser extends Auditable{
     private String LastName;
     private String UserName;
     private String Password;
-   // @ManyToMany(fetch = FetchType.EAGER)
-    //private Collection<Role> Roles = new ArrayList<>();
 
-    
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> Roles = new ArrayList<>();
 
     public AppUser() {
     }
@@ -28,13 +28,14 @@ public class AppUser extends Auditable{
 
 
     public AppUser(String firstName, String lastName, String userName, String password,
-            Collection<Role> roles) {
+            Collection<Role> roles, String createdBy) {
+        super(createdBy);
         Id = UUID.randomUUID().toString();
         FirstName = firstName;
         LastName = lastName;
         UserName = userName;
         Password = password;
-        //Roles = roles;
+        Roles = roles;
     }
 
 

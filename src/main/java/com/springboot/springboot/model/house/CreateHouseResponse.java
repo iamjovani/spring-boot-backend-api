@@ -1,4 +1,4 @@
-package com.springboot.springboot.model;
+package com.springboot.springboot.model.house;
 import java.util.HashMap;
 import java.util.Map;
 

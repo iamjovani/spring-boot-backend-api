@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.springboot.domain.House;
-import com.springboot.springboot.model.CreateHouseRequest;
-import com.springboot.springboot.model.CreateHouseResponse;
 import com.springboot.springboot.model.UpdateHouseRequest;
+import com.springboot.springboot.model.house.CreateHouseRequest;
+import com.springboot.springboot.model.house.CreateHouseResponse;
 import com.springboot.springboot.repository.IHouseRepository;
 
 

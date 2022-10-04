@@ -1,4 +1,4 @@
-package com.springboot.springboot.model;
+package com.springboot.springboot.model.house;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
