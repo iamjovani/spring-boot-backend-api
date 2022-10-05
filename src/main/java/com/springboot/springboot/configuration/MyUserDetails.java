@@ -2,22 +2,31 @@ package com.springboot.springboot.configuration;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.springboot.springboot.domain.AppUser;
+
 public class MyUserDetails implements UserDetails{
 
 
-    public final String userName;
+    public String UserName;
+    public String Password;
+    private boolean Enabled;
+    private List<GrantedAuthority> authority;
 
     public MyUserDetails(){
-        this.userName = null;
+        this.UserName = null;
     }
 
-    public MyUserDetails(String userName){
-        this.userName = userName;
+    public MyUserDetails(AppUser user){
+        this.UserName = user.getUserName();
+        this.Password = user.getPassword();
+        this.Enabled  = user.getEnabled();
+        this.authority = null;
     }
 
     @Override
@@ -27,12 +36,12 @@ public class MyUserDetails implements UserDetails{
 
     @Override
     public String getPassword() {
-        return "pass";
+        return Password;
     }
 
     @Override
     public String getUsername() {
-        return userName;
+        return UserName;
     }
 
     @Override
@@ -52,7 +61,7 @@ public class MyUserDetails implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return Enabled;
     }
     
 }

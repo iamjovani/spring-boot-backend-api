@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.springframework.boot.ansi.AnsiOutput.Enabled;
+
 @Entity
 public class AppUser extends Auditable{
     
@@ -16,8 +18,9 @@ public class AppUser extends Auditable{
     private String Id;
     private String FirstName;
     private String LastName;
-    private String UserName;
+    private String userName;
     private String Password;
+    private boolean Enabled;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> Roles = new ArrayList<>();
@@ -33,9 +36,10 @@ public class AppUser extends Auditable{
         Id = UUID.randomUUID().toString();
         FirstName = firstName;
         LastName = lastName;
-        UserName = userName;
+        this.userName = userName;
         Password = password;
         Roles = roles;
+        Enabled = true;
     }
 
 
@@ -77,13 +81,13 @@ public class AppUser extends Auditable{
 
 
     public String getUserName() {
-        return UserName;
+        return this.userName;
     }
 
 
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
 
@@ -96,6 +100,14 @@ public class AppUser extends Auditable{
 
     public void setPassword(String password) {
         Password = password;
+    }
+
+    public boolean getEnabled(){
+        return Enabled;
+    }
+
+    public void setEnabled(boolean enabled){
+        Enabled = enabled;
     }
 
 
