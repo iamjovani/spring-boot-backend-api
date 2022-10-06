@@ -41,6 +41,7 @@ public class SecurityConfiguration {
         http
             .authorizeHttpRequests((authz) -> authz
                 .anyRequest().authenticated()
+            
             )
             .httpBasic(withDefaults());
             http.cors().and().csrf().disable();
@@ -50,8 +51,8 @@ public class SecurityConfiguration {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring()
-                .antMatchers("${url.base.path}/user/register", "/login");
+         return (web) -> web.ignoring()
+                 .antMatchers("/api/v1/user/registration", "/login");
     }
 
     @Bean
