@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -30,6 +29,7 @@ import com.springboot.springboot.domain.AppUser;
 import com.springboot.springboot.domain.Role;
 import com.springboot.springboot.model.CreateUserRequest;
 import com.springboot.springboot.model.LoginUserRequest;
+import com.springboot.springboot.model.UserCollectionResponse;
 import com.springboot.springboot.repository.IRoleRepository;
 import com.springboot.springboot.repository.IUserRepository;
 
@@ -118,10 +118,11 @@ public class UserController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody List<AppUser> findAll()
+    public @ResponseBody List<Map<String, Object>> findAll()
     {
         List<AppUser> appUsers = _UserRepository.findAll();
-        return appUsers;
+        UserCollectionResponse appUsersObj = new UserCollectionResponse(appUsers);
+        return appUsersObj.getResponse();
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)

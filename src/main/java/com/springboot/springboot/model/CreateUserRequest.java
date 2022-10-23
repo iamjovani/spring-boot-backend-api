@@ -1,12 +1,9 @@
 package com.springboot.springboot.model;
 
-import java.util.Collection;
 import java.util.UUID;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import com.springboot.springboot.domain.Role;
 
 public class CreateUserRequest {
 

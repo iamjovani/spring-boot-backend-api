@@ -1,7 +1,6 @@
 package com.springboot.springboot.configuration.security;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.FilterChain;
@@ -16,14 +15,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 
 import com.springboot.springboot.configuration.AppUserDetailService;
 import com.springboot.springboot.configuration.AppUserDetails;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 

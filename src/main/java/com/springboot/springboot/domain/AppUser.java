@@ -9,8 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import org.springframework.boot.ansi.AnsiOutput.Enabled;
-
 @Entity
 public class AppUser extends Auditable{
     
