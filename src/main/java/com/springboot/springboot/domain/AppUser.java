@@ -112,14 +112,14 @@ public class AppUser extends Auditable{
 
 
 
-    // public Collection<Role> getRoles() {
-    //     return Roles;
-    // }
+    public Collection<Role> getRoles() {
+        return Roles;
+    }
 
 
 
-    // public void setRoles(Collection<Role> roles) {
-    //     Roles = roles;
-    // }
+    public void setRoles(Collection<Role> roles) {
+        Roles = roles;
+    }
 
 }

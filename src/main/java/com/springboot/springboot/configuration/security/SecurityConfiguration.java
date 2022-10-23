@@ -1,11 +1,10 @@
-package com.springboot.springboot.configuration;
+package com.springboot.springboot.configuration.security;
 
 
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +12,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 
@@ -34,17 +35,36 @@ public class SecurityConfiguration {
     @Autowired
     private Environment env;
 
+    @Autowired
     UserDetailsService userDetailsService;
+
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests((authz) -> authz
-                .anyRequest().authenticated()
-            
-            )
-            .httpBasic(withDefaults());
-            http.cors().and().csrf().disable();
+        http = http.cors().and().csrf().disable();
+
+        http = http
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and();
+
+        http = http
+                .exceptionHandling()
+                .authenticationEntryPoint(
+                        ((request, response, authException) -> {
+                            System.out.println("Unauthorized request");
+                            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+                        })
+                )
+                .and();
+                
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        
         return http.build();
     }
 
@@ -52,7 +72,7 @@ public class SecurityConfiguration {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
          return (web) -> web.ignoring()
-                 .antMatchers("/api/v1/user/registration", "/login");
+                 .antMatchers("/api/v1/user/registration", "/api/v1/user/login");
     }
 
     @Bean
@@ -66,8 +86,13 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public AuthenticationManager authenticationManagerBean(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.eraseCredentials(false)
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder);
+
+        return authenticationManagerBuilder.build();
     }
 
     // @Bean
@@ -76,7 +101,9 @@ public class SecurityConfiguration {
     // }
 
     @Bean
-    public PasswordEncoder getPasswordEncoder(){ return NoOpPasswordEncoder.getInstance();}
+	PasswordEncoder PasswordEncoder(){
+		return new BCryptPasswordEncoder();
+	}
 
     // @Bean
     // public UserDetailsManager users(DataSource dataSource) {
